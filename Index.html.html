@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffe4ef">
+<title>Bujju Kutty's Little World 💗</title>
+<style>
+:root{--pink:#ff6fa8;--deep:#d94d86;--pale:#fff1f6;--ink:#713b55;--cream:#fffafd}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(160deg,#fff4f8 0%,#ffe3ee 48%,#fff8fb 100%);color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+.wrap{width:min(100% - 28px,760px);margin:auto}
+.hero{min-height:92vh;display:grid;place-items:center;text-align:center;padding:54px 0 38px;position:relative}
+.hero-card,.panel{background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.95);box-shadow:0 14px 45px rgba(201,91,137,.12);border-radius:28px}
+.hero-card{padding:36px 22px;width:100%;max-width:620px;position:relative;overflow:hidden}
+.eyebrow{letter-spacing:.16em;text-transform:uppercase;font-size:.72rem;color:#c66a91;font-weight:800}
+h1{font-size:clamp(2.3rem,9vw,4.4rem);line-height:1.02;margin:14px 0;color:#d94d86}
+.subtitle{font-size:1.06rem;line-height:1.7;max-width:440px;margin:0 auto 22px}
+.heart{font-size:2.2rem;display:inline-block;animation:beat 1.3s infinite}
+@keyframes beat{50%{transform:scale(1.2)}}
+.primary,.soft,.choice{border:0;border-radius:999px;padding:13px 19px;font-weight:800;transition:.2s}
+.primary{background:linear-gradient(135deg,#ff82b2,#e85d97);color:white;box-shadow:0 8px 18px #f4a4c4}
+.soft,.choice{background:#fff0f6;color:#b84c7d;border:1px solid #ffd3e3}
+.primary:active,.soft:active,.choice:active{transform:scale(.97)}
+section{padding:20px 0 34px}
+.section-title{text-align:center;font-size:1.7rem;color:#ce5288;margin:0 0 8px}
+.section-sub{text-align:center;margin:0 auto 18px;line-height:1.55;color:#98627a}
+.panel{padding:22px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mood{padding:15px 8px;border:1px solid #ffd6e5;border-radius:18px;background:#fff8fb;color:var(--ink);font-weight:750}
+.mood span{display:block;font-size:1.8rem;margin-bottom:5px}
+.mood.selected{background:#ffe0ed;border:2px solid #f58ab4}
+.result{background:#fff2f7;border-radius:18px;padding:16px;text-align:center;line-height:1.6;margin-top:14px;min-height:66px}
+.action-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.choco{font-size:3.2rem;display:block;text-align:center;filter:drop-shadow(0 5px 5px #e9a3be)}
+.counter{text-align:center;font-weight:800;color:#bd4c7e;margin:8px}
+.story{border-left:3px solid #f6a0c1;padding:2px 0 3px 17px;margin:18px 0}
+.story strong{color:#c94e83}
+footer{text-align:center;padding:28px 10px 45px;color:#a96b85}
+.floating{position:fixed;pointer-events:none;z-index:5;animation:floatUp 2.4s ease-out forwards;font-size:22px}
+@keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(.7)}15%{opacity:1}100%{opacity:0;transform:translateY(-190px) rotate(18deg) scale(1.4)}}
+.small{font-size:.88rem;color:#a66d84}
+@media(min-width:600px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero-card{padding:48px 40px}.panel{padding:28px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="hero wrap">
+  <div class="hero-card">
+    <div class="heart">💗</div>
+    <div class="eyebrow">a tiny place made with lots of love</div>
+    <h1>Bujju Kutty's<br>Little World</h1>
+    <p class="subtitle">Heyyy my Bujju Kutty! 🌷<br>If today feels a little heavy, come here. This little corner is just for you — filled with hugs, smiles, chocolates and all my love.</p>
+    <button class="primary" onclick="document.getElementById('comfort').scrollIntoView({behavior:'smooth'})">Come inside, kutty 💕</button>
+    <p class="small" style="margin-top:18px">A reminder: you are loved on every kind of day.</p>
+  </div>
+</header>
+
+<main class="wrap">
+<section id="comfort">
+  <h2 class="section-title">How is my girl feeling?</h2>
+  <p class="section-sub">Pick the one that feels closest. No explanation needed. 🫶</p>
+  <div class="panel">
+    <div class="grid" id="moods">
+      <button class="mood" data-mood="sad" onclick="chooseMood(this)"><span>🥺</span>A little sad</button>
+      <button class="mood" data-mood="tired" onclick="chooseMood(this)"><span>😴</span>Very tired</button>
+      <button class="mood" data-mood="irritated" onclick="chooseMood(this)"><span>😤</span>Not in the mood</button>
+      <button class="mood" data-mood="happy" onclick="chooseMood(this)"><span>🥰</span>Doing okay</button>
+    </div>
+    <div class="result" id="moodResult" aria-live="polite">Whatever your mood is, you don't have to pretend with me. I'm right here. 💗</div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">A hug, delivered! 🫂</h2>
+  <p class="section-sub">It may be virtual, but the love behind it is real.</p>
+  <div class="panel" style="text-align:center">
+    <div style="font-size:4rem">🧸💞</div>
+    <p id="hugText">Sending you the biggest, warmest hug. Stay here as long as you need, Bujju.</p>
+    <button class="primary" onclick="hugMe()">Tap for a hug 🫂</button>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">A little love note 💌</h2>
+  <p class="section-sub">Tap whenever you need a sweet reminder.</p>
+  <div class="panel" style="text-align:center">
+    <div style="font-size:2rem">💌</div>
+    <div class="result" id="loveNote">You make ordinary days feel special just by being you.</div>
+    <button class="soft" onclick="newNote()">Another little note ✨</button>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">A chocolate for you 🍫</h2>
+  <p class="section-sub">A whole virtual box. Zero sharing required. Hehe!</p>
+  <div class="panel">
+    <span class="choco" id="chocolate">🍫</span>
+    <div class="counter" id="chocoCount">Chocolates gifted: 0</div>
+    <div class="action-row"><button class="primary" onclick="giveChocolate()">Send me chocolate!</button><button class="soft" onclick="resetChocolate()">Start my box again</button></div>
+    <p class="small" style="text-align:center;margin:14px 0 0">P.S. This is your reminder to enjoy a real treat too, if you feel like it. 💗</p>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Our little story 📖</h2>
+  <p class="section-sub">Some dates become memories we keep close.</p>
+  <div class="panel">
+    <div class="story"><strong>24 July 2025</strong><br>The day I asked you to be mine. A little courage, a lot of hope, and one very special question. 💗</div>
+    <div class="story"><strong>204 days of waiting</strong><br>And then came the reply I still remember: “seri ennaku okieee” 🥹</div>
+    <div class="story"><strong>Still writing our story</strong><br>More laughs, silly moments, little surprises and memories waiting for us. One page at a time. 🌷</div>
+    <div class="result">My favourite part of the story is that I get to keep choosing you. ❤️</div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">One last surprise… 🎀</h2>
+  <p class="section-sub">A tiny reminder, just for you.</p>
+  <div class="panel" style="text-align:center">
+    <div style="font-size:2.8rem">🎁</div>
+    <button class="primary" onclick="surprise()">Open your surprise</button>
+    <div class="result" id="surpriseResult" style="display:none">If I could make one wish right now, it would be to see you smile, feel comfortable, and remember how precious you are to me. I love you, Bujju Kutty. 💗</div>
+  </div>
+</section>
+</main>
+<footer>
+  Made with a whole lot of love, just for Bujju Kutty 💗<br>
+  <span class="small">Whenever you need a little softness, come back here.</span>
+</footer>
+<script>
+const moodMessages={
+sad:"It's okay to have a low day, my love. You don't need to force a smile. I'm here, and you are never a burden. 💗",
+tired:"Rest, kutty. Let the world wait for a little while. Get cosy, sip some water and take it slow. 🧸",
+irritated:"No pressure to be cheerful or reply quickly. Take your time. I'll be patient with you. 🌷",
+happy:"That makes me happy too! Keep that lovely smile safe — sending you a kiss. 😘"
+};
+function chooseMood(btn){
+ document.querySelectorAll('.mood').forEach(b=>b.classList.remove('selected'));
+ btn.classList.add('selected');
+ document.getElementById('moodResult').textContent=moodMessages[btn.dataset.mood];
+ hearts(5);
+}
+function hearts(n){
+ const symbols=['💗','💕','🌸','✨','🫶'];
+ for(let i=0;i<n;i++){
+  const el=document.createElement('span');el.className='floating';el.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+  el.style.left=(10+Math.random()*80)+'vw';el.style.top=(55+Math.random()*30)+'vh';
+  document.body.appendChild(el);setTimeout(()=>el.remove(),2500);
+ }
+}
+function hugMe(){
+ document.getElementById('hugText').textContent="Tightest huggg! 🫂 Imagine me holding you close and reminding you: you are safe, loved and so precious to me.";
+ hearts(12);
+}
+const notes=[
+"You are my favourite notification, even on the busiest day. 💌",
+"You don't have to be perfect to be loved. You are already more than enough. 🌷",
+"If I could, I'd send a warm hug through this screen right now. 🫂",
+"Your smile is one of my favourite things in this world. Keep being you. 💗",
+"Even on your messy, tired, quiet days — you are still my favourite person. 🥹",
+"Take a deep breath, kutty. One moment at a time. I'm cheering for you. ✨"
+];
+function newNote(){document.getElementById('loveNote').textContent=notes[Math.floor(Math.random()*notes.length)];hearts(4)}
+let chocolates=0;
+function giveChocolate(){chocolates++;document.getElementById('chocoCount').textContent='Chocolates gifted: '+chocolates;document.getElementById('chocolate').textContent=chocolates%3===0?'🍫🍫🍫':'🍫';hearts(3)}
+function resetChocolate(){chocolates=0;document.getElementById('chocoCount').textContent='Chocolates gifted: 0';document.getElementById('chocolate').textContent='🍫'}
+function surprise(){const box=document.getElementById('surpriseResult');box.style.display='block';hearts(18);box.scrollIntoView({behavior:'smooth',block:'center'})}
+</script>
+</body>
+</html>
